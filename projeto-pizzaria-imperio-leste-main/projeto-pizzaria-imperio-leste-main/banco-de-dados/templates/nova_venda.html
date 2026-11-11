@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Venda - Império Leste</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 25px;
+            background: #51703C;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .voltar {
+            margin-left: 10px;
+            color: #51703C;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Nova Venda</h1>
+
+    <form method="POST">
+
+        <label>Cliente</label>
+        <select name="id_cliente">
+            <option value="">Venda sem cliente identificado</option>
+
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id_cliente }}">
+                    {{ cliente.nome }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label>Observação</label>
+        <textarea name="observacao" rows="3"></textarea>
+
+        <button type="submit">Continuar</button>
+
+        <a href="/vendas" class="voltar">Voltar</a>
+
+    </form>
+
+</div>
+
+</body>
+</html>

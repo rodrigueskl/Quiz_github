@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Ingrediente - Império Leste</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #222;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #51703C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .voltar {
+            margin-left: 10px;
+            color: #51703C;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Editar Ingrediente</h1>
+
+        <form method="POST">
+
+            <label>Nome do ingrediente</label>
+            <input type="text" name="nome" maxlength="100"
+                   value="{{ ingrediente.nome }}" required>
+
+            <label>Unidade de medida</label>
+            <select name="unidade_medida" required>
+                <option value="KG" {% if ingrediente.unidade_medida == 'KG' %}selected{% endif %}>KG</option>
+                <option value="G" {% if ingrediente.unidade_medida == 'G' %}selected{% endif %}>G</option>
+                <option value="L" {% if ingrediente.unidade_medida == 'L' %}selected{% endif %}>L</option>
+                <option value="ML" {% if ingrediente.unidade_medida == 'ML' %}selected{% endif %}>ML</option>
+                <option value="UN" {% if ingrediente.unidade_medida == 'UN' %}selected{% endif %}>UN</option>
+            </select>
+
+            <label>Custo unitário</label>
+            <input type="number" name="custo_unitario" step="0.01" min="0"
+                   value="{{ ingrediente.custo_unitario }}" required>
+
+            <label>Fornecedor</label>
+            <input type="text" name="fornecedor" maxlength="120"
+                   value="{{ ingrediente.fornecedor or '' }}">
+
+            <label>Data de atualização</label>
+            <input type="date" name="data_atualizacao"
+                   value="{{ ingrediente.data_atualizacao }}" required>
+
+            <label>Status</label>
+            <select name="status" required>
+                <option value="ATIVO" {% if ingrediente.status == 'ATIVO' %}selected{% endif %}>ATIVO</option>
+                <option value="INATIVO" {% if ingrediente.status == 'INATIVO' %}selected{% endif %}>INATIVO</option>
+            </select>
+
+            <button type="submit">Salvar Alterações</button>
+
+            <a href="/ingredientes" class="voltar">Cancelar</a>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

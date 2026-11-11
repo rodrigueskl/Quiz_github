@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Império Leste | Produtos</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #1e293b;
+        }
+
+        .main {
+            padding: 35px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+        }
+
+        .header p {
+            color: #64748b;
+            margin-top: 8px;
+        }
+
+        .btn {
+            background: #51703C;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .content-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            color: #64748b;
+            font-size: 13px;
+            background: #f8fafc;
+        }
+
+        .status {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #51703C;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="main">
+
+        <a href="/" class="voltar">← Voltar ao Dashboard</a>
+
+        <header class="header">
+            <div>
+                <h1>Produtos</h1>
+                <p>Gerenciamento de pizzas do Império Leste.</p>
+            </div>
+
+            
+<a href="/novo-produto" class="btn">+ Novo Produto</a>
+
+        </header>
+
+        <section class="content-box">
+
+            <h2>Produtos cadastrados</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th>Categoria</th>
+                        <th>Preço de venda</th>
+                        <th>Status</th>
+<th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for produto in produtos %}
+                    <tr>
+                        <td>{{ produto.id_produto }}</td>
+                        <td>{{ produto.nome }}</td>
+                        <td>{{ produto.categoria }}</td>
+                        <td>R$ {{ "%.2f"|format(produto.preco_venda) }}</td>
+                        <td>
+                            <span class="status">{{ produto.status }}</span>
+</td>
+<td>
+    <a href="/editar-produto/{{ produto.id_produto }}"
+       style="color: #51703C; text-decoration: none; font-weight: bold;">
+       Editar
+    </a>
+    
+<form action="/excluir-produto/{{ produto.id_produto }}" method="POST"
+onsubmit="return confirm('Tem certeza que deseja excluir este produto?');"
+style="display: inline;">
+
+<button type="submit"
+      style="background: #c0392b; color: white; border: none;
+             padding: 6px 10px; border-radius: 5px; cursor: pointer;">
+  Excluir
+</button>
+
+</form>
+
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5">Nenhum produto cadastrado.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

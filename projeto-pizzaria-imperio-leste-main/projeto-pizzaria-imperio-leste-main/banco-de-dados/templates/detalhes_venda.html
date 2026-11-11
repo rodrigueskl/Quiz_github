@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Venda - Império Leste</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        .informacoes {
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #51703C;
+            color: white;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 25px;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 25px;
+            color: #51703C;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Detalhes da Venda #{{ venda.id_venda }}</h1>
+
+    <div class="informacoes">
+        <strong>Cliente:</strong>
+        {{ venda.nome_cliente or "Não identificado" }}<br>
+
+        <strong>Data:</strong>
+        {{ venda.data_venda }}<br>
+
+        <strong>Observação:</strong>
+        {{ venda.observacao or "Nenhuma" }}
+    </div>
+
+    <h2>Produtos da Venda</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço Unitário</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in itens %}
+            <tr>
+                <td>{{ item.nome_produto }}</td>
+                <td>{{ item.quantidade }}</td>
+                <td>R$ {{ "%.2f"|format(item.preco_unitario) }}</td>
+                <td>R$ {{ "%.2f"|format(item.subtotal) }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Nenhum produto adicionado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="total">
+        Total: R$ {{ "%.2f"|format(total) }}
+    </div>
+
+    <a href="/vendas" class="voltar">← Voltar para vendas</a>
+
+</div>
+
+</body>
+</html>
