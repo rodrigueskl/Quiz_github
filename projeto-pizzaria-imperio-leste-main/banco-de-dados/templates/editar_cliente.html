@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Cliente - Império Leste</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 25px;
+            background: #51703C;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-left: 10px;
+            color: #51703C;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Editar Cliente</h1>
+
+    <form method="POST">
+
+        <label>Nome</label>
+        <input type="text" name="nome" value="{{ cliente.nome }}" required>
+
+        <label>CPF</label>
+        <input type="text" name="cpf" value="{{ cliente.cpf or '' }}">
+
+        <label>CEP</label>
+        <input type="text" name="cep" value="{{ cliente.cep or '' }}">
+
+        <label>Telefone</label>
+        <input type="text" name="telefone" value="{{ cliente.telefone or '' }}">
+
+        <label>WhatsApp</label>
+        <input type="text" name="whatsapp" value="{{ cliente.whatsapp or '' }}">
+
+        <label>E-mail</label>
+        <input type="email" name="email" value="{{ cliente.email or '' }}">
+
+        <label>Endereço</label>
+        <input type="text" name="endereco" value="{{ cliente.endereco or '' }}">
+
+        <label>Data de Cadastro</label>
+        <input type="date" name="data_cadastro" value="{{ cliente.data_cadastro }}" required>
+
+        <label>Status</label>
+        <select name="status" required>
+            <option value="ATIVO" {% if cliente.status == 'ATIVO' %}selected{% endif %}>ATIVO</option>
+            <option value="INATIVO" {% if cliente.status == 'INATIVO' %}selected{% endif %}>INATIVO</option>
+        </select>
+
+        <button type="submit">Salvar Alterações</button>
+
+        <a href="/clientes" class="voltar">Voltar</a>
+
+    </form>
+
+</div>
+
+</body>
+</html>

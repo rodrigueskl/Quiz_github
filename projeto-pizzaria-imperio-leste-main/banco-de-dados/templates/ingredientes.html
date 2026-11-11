@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingredientes - Império Leste</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #51703C;
+            color: white;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #51703C;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 20px;
+            color: #51703C;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Ingredientes</h1>
+
+        <a href="/novo-ingrediente" class="btn">+ Novo Ingrediente</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Unidade</th>
+                    <th>Custo Unitário</th>
+                    <th>Fornecedor</th>
+                    <th>Atualização</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for ingrediente in ingredientes %}
+                <tr>
+                    <td>{{ ingrediente.id_ingrediente }}</td>
+                    <td>{{ ingrediente.nome }}</td>
+                    <td>{{ ingrediente.unidade_medida }}</td>
+                    <td>R$ {{ ingrediente.custo_unitario }}</td>
+                    <td>{{ ingrediente.fornecedor or '-' }}</td>
+                    <td>{{ ingrediente.data_atualizacao }}</td>
+                    <td>{{ ingrediente.status }}</td>
+                    
+                    <td>
+                        <a href="/editar-ingrediente/{{ ingrediente.id_ingrediente }}"
+                           style="color: #51703C; text-decoration: none; font-weight: bold;">
+                           Editar
+                        </a>
+                    
+                        <form action="/alternar-status-ingrediente/{{ ingrediente.id_ingrediente }}"
+                              method="POST"
+                              style="display: inline; margin-left: 10px;">
+                    
+                            {% if ingrediente.status == 'ATIVO' %}
+                                <button type="submit"
+                                        style="background: #b33a3a; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer;">
+                                    Desativar
+                                </button>
+                            {% else %}
+                                <button type="submit"
+                                        style="background: #51703C; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer;">
+                                    Ativar
+                                </button>
+                            {% endif %}
+                    
+                        </form>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="/" class="voltar">← Voltar ao Dashboard</a>
+
+    </div>
+
+</body>
+</html>

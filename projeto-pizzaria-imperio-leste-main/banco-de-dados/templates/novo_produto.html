@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Império Leste | Novo Produto</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #1e293b;
+            padding: 35px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #51703C;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .btn {
+            background: #51703C;
+            color: white;
+            padding: 13px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <a href="/produtos" class="voltar">← Voltar aos Produtos</a>
+
+        <div class="form-box">
+
+            <h1>Novo Produto</h1>
+            <p>Preencha os dados da pizza para cadastrá-la no sistema.</p>
+
+            <form method="POST" action="/novo-produto">
+
+                <label for="nome">Nome do produto</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" name="descricao" rows="3"></textarea>
+
+                <label for="categoria">Categoria</label>
+                <input type="text" id="categoria" name="categoria" required>
+
+                <label for="preco_venda">Preço de venda (R$)</label>
+                <input type="number" id="preco_venda" name="preco_venda"
+                       step="0.01" min="0" required>
+
+                <label for="id_margem">Margem de lucro</label>
+                <select id="id_margem" name="id_margem" required>
+                    <option value="">Selecione uma margem</option>
+                    <option value="1">Margem 1</option>
+                    <option value="2">Margem 2</option>
+                </select>
+
+                <label for="status">Status</label>
+                <select id="status" name="status" required>
+                    <option value="ATIVO">ATIVO</option>
+                    <option value="INATIVO">INATIVO</option>
+                </select>
+
+                <button type="submit" class="btn">Cadastrar Produto</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
