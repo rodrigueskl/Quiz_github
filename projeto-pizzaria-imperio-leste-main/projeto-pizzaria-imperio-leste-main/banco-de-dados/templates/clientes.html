@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes - Império Leste</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        .novo {
+            display: inline-block;
+            background: #51703C;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #222;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Clientes</h1>
+
+    <a href="/novo-cliente" class="novo">+ Novo Cliente</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+                <th>WhatsApp</th>
+                <th>E-mail</th>
+                <th>Cadastro</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.id_cliente }}</td>
+                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.cpf or '-' }}</td>
+                <td>{{ cliente.telefone or '-' }}</td>
+                <td>{{ cliente.whatsapp or '-' }}</td>
+                <td>{{ cliente.email or '-' }}</td>
+                <td>{{ cliente.data_cadastro }}</td>
+                <td>{{ cliente.status }}</td>
+                <td>
+                    <a href="/editar-cliente/{{ cliente.id_cliente }}"
+                       style="color: #51703C; text-decoration: none; font-weight: bold;">
+                       Editar
+                    </a>
+                
+                    <form action="/alternar-status-cliente/{{ cliente.id_cliente }}"
+                          method="POST"
+                          style="display: inline; margin-left: 10px;">
+                
+                        {% if cliente.status == 'ATIVO' %}
+                            <button type="submit"
+                                    style="background: #b33a3a; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer;">
+                                Desativar
+                            </button>
+                        {% else %}
+                            <button type="submit"
+                                    style="background: #51703C; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer;">
+                                Ativar
+                            </button>
+                        {% endif %}
+                
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

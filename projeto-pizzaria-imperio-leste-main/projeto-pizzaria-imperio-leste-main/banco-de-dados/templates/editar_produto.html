@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Produto - Império Leste</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #222;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #51703C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .voltar {
+            margin-left: 10px;
+            color: #51703C;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Editar Produto</h1>
+
+        <form method="POST">
+
+            <label>Nome do produto</label>
+            <input type="text" name="nome" value="{{ produto.nome }}" required>
+
+            <label>Descrição</label>
+            <input type="text" name="descricao" value="{{ produto.descricao or '' }}">
+
+            <label>Categoria</label>
+            <input type="text" name="categoria" value="{{ produto.categoria }}" required>
+
+            <label>Preço de venda</label>
+            <input type="number" name="preco_venda" step="0.01" value="{{ produto.preco_venda }}" required>
+
+            <label>Margem de lucro</label>
+            <select name="id_margem" required>
+                <option value="1" {% if produto.id_margem == 1 %}selected{% endif %}>Margem 1</option>
+                <option value="2" {% if produto.id_margem == 2 %}selected{% endif %}>Margem 2</option>
+            </select>
+
+            <label>Status</label>
+            <select name="status" required>
+                <option value="ATIVO" {% if produto.status == 'ATIVO' %}selected{% endif %}>ATIVO</option>
+                <option value="INATIVO" {% if produto.status == 'INATIVO' %}selected{% endif %}>INATIVO</option>
+            </select>
+
+            <button type="submit">Salvar Alterações</button>
+
+            <a href="/produtos" class="voltar">Cancelar</a>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
